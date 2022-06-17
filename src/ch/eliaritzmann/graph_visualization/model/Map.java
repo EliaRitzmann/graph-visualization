@@ -8,6 +8,7 @@ public class Map extends Observable {
     private ArrayList<Realation> realations = new ArrayList<>();
     private int[][] matrix = new int[0][0];
 
+
     public void deleteKeyPressed(){
 
         Point[] delete = getSelectedPoints();
@@ -28,7 +29,15 @@ public class Map extends Observable {
     }
 
     public void enterKeyPressed(){
+        if(getSelectedPoints().length == 2){
+            System.out.println("enter");
+            Realation realation = new Realation(getSelectedPoints()[0], getSelectedPoints()[1]);
+            matrix[getSelectedPoints()[0].getNumber()][getSelectedPoints()[1].getNumber()] = (int)realation.getDistance();
+            matrix[getSelectedPoints()[1].getNumber()][getSelectedPoints()[0].getNumber()] = (int)realation.getDistance();
+            realations.add(realation);
+            update();
 
+        }
 
     }
 
@@ -122,13 +131,15 @@ public class Map extends Observable {
     }
 
     private void debugMatrix(){
-        for (int i = 0; i<this.matrix.length; i++)
-            for (int j = 0; j<this.matrix[i].length; j++)
-                matrix[i][j] = 0;
 
         for (int i = 0; i<this.matrix.length; i++) {
             for (int j = 0; j<this.matrix[i].length; j++) {
-                System.out.print(matrix[i][j]);
+                if(matrix[i][j] == 0){
+                    System.out.print(0);
+                }else{
+                    System.out.print(matrix[i][j]);
+                }
+
             }
             System.out.println();
         }

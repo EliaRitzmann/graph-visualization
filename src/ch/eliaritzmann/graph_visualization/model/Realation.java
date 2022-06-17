@@ -12,6 +12,11 @@ public class Realation {
         return pointb;
     }
 
+    public Realation(Point pointa, Point pointb) {
+        this.pointa = pointa;
+        this.pointb = pointb;
+    }
+
     public double getDistance(){
         //Pythagoras
         int a = pointa.getX() - pointb.getX();
