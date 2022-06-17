@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class Map extends Observable {
+    private Matrix matrix = new Matrix();
     private ArrayList<Point> points = new ArrayList<>();
-    private ArrayList<Realation> realations = new ArrayList<>();
-    private int[][] matrix = new int[0][0];
-
 
     public void deleteKeyPressed(){
 
@@ -16,7 +14,7 @@ public class Map extends Observable {
         for (int i = 0; i < delete.length; i++) {
             //update matrix
             System.out.println("Index: " + delete[i].getNumber());
-            matrix = removePointFromMatrix(delete[i].getNumber());
+            matrix.removePointFromMatrix(delete[i].getNumber());
         }
 
         points.removeIf(Point::isSeleted);
@@ -31,12 +29,11 @@ public class Map extends Observable {
     public void enterKeyPressed(){
         if(getSelectedPoints().length == 2){
             System.out.println("enter");
-            Realation realation = new Realation(getSelectedPoints()[0], getSelectedPoints()[1]);
-            matrix[getSelectedPoints()[0].getNumber()][getSelectedPoints()[1].getNumber()] = (int)realation.getDistance();
-            matrix[getSelectedPoints()[1].getNumber()][getSelectedPoints()[0].getNumber()] = (int)realation.getDistance();
-            realations.add(realation);
-            update();
+            matrix.addRelation(getSelectedPoints()[0], getSelectedPoints()[1]);
 
+            //Deselect points
+            deSelectAll();
+            update();
         }
 
     }
@@ -54,38 +51,6 @@ public class Map extends Observable {
         return selectedPoints.toArray(array);
     }
 
-    private int[][] addPointToMatrix(){
-        int[][] matrix = new int[this.matrix.length+1][this.matrix.length+1];
-
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if(j > this.matrix.length-1 || i > this.matrix.length-1){
-                    //add new Points
-                    matrix[i][j] = 0;
-                }else{
-                    //reuse Points
-                    matrix[i][j] = this.matrix[i][j];
-                }
-            }
-        }
-        return matrix;
-    }
-
-    private int[][] removePointFromMatrix(int index){
-        System.out.println(index);
-        int[][] matrix = new int[this.matrix.length][this.matrix.length];
-        System.out.println(this.matrix.length);
-        for (int i = 0, ci = 0; i < this.matrix.length; i++) {
-            for (int j = 0, cj = 0; j < this.matrix.length; j++) {
-                if(i != index){
-                    matrix[ci++][j] = this.matrix[i][j];
-                }
-            }
-        }
-        return matrix;
-    }
-
-
     public void mouseClicked(int x, int y){
         addPoint(x, y);
     }
@@ -93,7 +58,7 @@ public class Map extends Observable {
     private void addPoint(int x, int y){
         if (points.size() == 0){
             points.add(new Point(x, y, 0));
-            matrix = addPointToMatrix();
+            matrix.addPointToMatrix();
             update();
             return;
         }
@@ -114,34 +79,19 @@ public class Map extends Observable {
         }
 
         points.add(new Point(x, y, points.size()));
-        matrix = addPointToMatrix();
+        matrix.addPointToMatrix();
         update();
     }
 
     private void update(){
-        debugMatrix();
+        matrix.debugMatrix();
         setChanged();
-        notifyObservers(new Object[]{points, realations});
+        notifyObservers(new Object[]{points, matrix.getRelations(points)});
     }
 
     private void deSelectAll(){
         for (Point p: points
              ) {p.setSeleted(false);
-        }
-    }
-
-    private void debugMatrix(){
-
-        for (int i = 0; i<this.matrix.length; i++) {
-            for (int j = 0; j<this.matrix[i].length; j++) {
-                if(matrix[i][j] == 0){
-                    System.out.print(0);
-                }else{
-                    System.out.print(matrix[i][j]);
-                }
-
-            }
-            System.out.println();
         }
     }
 }

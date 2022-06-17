@@ -26,6 +26,12 @@ public class Canvas extends JComponent implements Observer {
                     realations.get(i).getPointb().getX() + 12,
                     realations.get(i).getPointb().getY() + 12
             );
+            /*
+            graphics2D.drawString(Integer.toString((int) realations.get(i).getDistance()) ,
+                    Math.abs(realations.get(i).getPointa().getX()-realations.get(i).getPointb().getX()) + realations.get(i).getPointa().getX(),
+                    realations.get(i).getPointb().getY());
+
+             */
         }
 
         //draw points (on top of graphs)
@@ -53,7 +59,6 @@ public class Canvas extends JComponent implements Observer {
         Object[] objects = (Object[]) arg;
         points = (ArrayList<Point>) objects[0];
         realations = (ArrayList<Realation>) objects[1];
-        System.out.println(realations);
         repaint();
     }
 }
