@@ -36,6 +36,8 @@ public class Controller implements MouseListener, KeyListener {
             map.deleteKeyPressed();
         }else if (e.getKeyCode() == KeyEvent.VK_ENTER){
             map.enterKeyPressed();
+        }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            map.spaceKeyPressed();
         }
     }
 

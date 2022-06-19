@@ -4,7 +4,7 @@ public class Point {
     private int x;
     private int y;
     private int number;
-    private boolean isSeleted = false;
+    private int isSelected = -1;
 
     public void setNumber(int number) {
         this.number = number;
@@ -16,12 +16,12 @@ public class Point {
         this.number = number;
     }
 
-    public boolean isSeleted() {
-        return isSeleted;
+    public int isSeleted() {
+        return isSelected;
     }
 
-    public void setSeleted(boolean seleted) {
-        isSeleted = seleted;
+    public void setSeleted(int seleted) {
+        isSelected = seleted;
     }
 
     public int getX() {

@@ -1,6 +1,6 @@
 package ch.eliaritzmann.graph_visualization.model;
 
-public class Realation {
+public class Relation {
     private Point pointa;
     private Point pointb;
 
@@ -12,7 +12,7 @@ public class Realation {
         return pointb;
     }
 
-    public Realation(Point pointa, Point pointb) {
+    public Relation(Point pointa, Point pointb) {
         this.pointa = pointa;
         this.pointb = pointb;
     }

@@ -6,11 +6,10 @@ public class Matrix {
     private int[][] matrix = new int[0][0];
 
     public void addRelation(Point a, Point b){
-        Realation realation = new Realation(a, b);
+        Relation relation = new Relation(a, b);
 
-        //Beide Richtungen
-        matrix[a.getNumber()][b.getNumber()] = (int) realation.getDistance();
-        matrix[a.getNumber()][b.getNumber()] = (int) realation.getDistance();
+
+        matrix[a.getNumber()][b.getNumber()] = (int) relation.getDistance();
     }
 
     public void addPointToMatrix(){
@@ -49,16 +48,16 @@ public class Matrix {
         this.matrix = matrix;
     }
 
-    public ArrayList<Realation> getRelations(ArrayList<Point> points){
-        ArrayList<Realation> realations = new ArrayList<>();
+    public ArrayList<Relation> getRelations(ArrayList<Point> points){
+        ArrayList<Relation> relations = new ArrayList<>();
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 if(matrix[i][j] != 0){
-                    realations.add(new Realation(points.get(i), points.get(j)));
+                    relations.add(new Relation(points.get(i), points.get(j)));
                 }
             }
         }
-        return realations;
+        return relations;
     }
 
     public int[][] getMatrix() {

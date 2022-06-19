@@ -1,39 +1,68 @@
 package ch.eliaritzmann.graph_visualization.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 
 public class Map extends Observable {
     private Matrix matrix = new Matrix();
     private ArrayList<Point> points = new ArrayList<>();
 
+    private boolean running = false;
+
     public void deleteKeyPressed(){
+        if(!running){
+            Point[] delete = getSelectedPoints();
 
-        Point[] delete = getSelectedPoints();
+            for (int i = 0; i < delete.length; i++) {
+                //update matrix
+                System.out.println("Index: " + delete[i].getNumber());
+                matrix.removePointFromMatrix(delete[i].getNumber());
+            }
 
-        for (int i = 0; i < delete.length; i++) {
-            //update matrix
-            System.out.println("Index: " + delete[i].getNumber());
-            matrix.removePointFromMatrix(delete[i].getNumber());
+            points.removeIf(p -> p.isSeleted() == -1);
+
+
+            for (int i = 0; i < points.size(); i++) {
+                points.get(i).setNumber(i);
+            }
+
+            update();
         }
 
-        points.removeIf(Point::isSeleted);
-
-        for (int i = 0; i < points.size(); i++) {
-            points.get(i).setNumber(i);
-        }
-
-        update();
     }
 
     public void enterKeyPressed(){
-        if(getSelectedPoints().length == 2){
-            System.out.println("enter");
-            matrix.addRelation(getSelectedPoints()[0], getSelectedPoints()[1]);
+        if(!running){
+            if(getSelectedPoints().length == 2){
+                System.out.println("enter");
 
-            //Deselect points
-            deSelectAll();
-            update();
+                Point[] selectedPoints = getSelectedPoints();
+
+                if(selectedPoints[0].isSeleted() > selectedPoints[1].isSeleted()){
+                    matrix.addRelation(getSelectedPoints()[0], getSelectedPoints()[1]);
+                }else{
+                    matrix.addRelation(getSelectedPoints()[1], getSelectedPoints()[0]);
+                }
+
+
+                //Deselect points
+                deSelectAll();
+                update();
+            }
+        }
+    }
+
+    public void spaceKeyPressed(){
+        if(getSelectedPoints().length == 2){
+            running = true;
+
+        }
+    }
+
+    public void mouseClicked(int x, int y){
+        if(!running){
+            addPoint(x, y);
         }
 
     }
@@ -42,17 +71,13 @@ public class Map extends Observable {
         ArrayList<Point> selectedPoints = new ArrayList<>();
         for (Point p: this.points
              ) {
-            if (p.isSeleted()){
+            if (p.isSeleted() != -1){
                 selectedPoints.add(p);
             }
         }
 
         Point[] array = new Point[selectedPoints.size()];
         return selectedPoints.toArray(array);
-    }
-
-    public void mouseClicked(int x, int y){
-        addPoint(x, y);
     }
 
     private void addPoint(int x, int y){
@@ -67,14 +92,21 @@ public class Map extends Observable {
         ) {
             if(x > p.getX()-25 && x < p.getX()+25 && y > p.getY()-25 && y < p.getY()+25){
                 //select Point
-                if(getSelectedPoints().length == 2){
-                    deSelectAll();
+                if(p.isSeleted() != -1){
+                    p.setSeleted(-1);
                 }else{
-                    p.setSeleted(!p.isSeleted());
+                    if(getSelectedPoints().length == 2){
+                        deSelectAll();
+                    }else if(getSelectedPoints().length == 1){
+                        p.setSeleted(1);
+                    }else {
+                        p.setSeleted(0);
+                    }
                 }
 
                 update();
                 return;
+
             }
         }
 
@@ -91,7 +123,7 @@ public class Map extends Observable {
 
     private void deSelectAll(){
         for (Point p: points
-             ) {p.setSeleted(false);
+             ) {p.setSeleted(-1);
         }
     }
 }
