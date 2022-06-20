@@ -14,6 +14,11 @@ public class Starter {
         Controller controller = new Controller(map);
         Window window = new Window(controller, canvas);
 
+        System.out.println("Anleitung:");
+        System.out.println("Linke Maustaste: Hinzufügen/auswählen von Knoten");
+        System.out.println("DELETE-Taste: Löschen von ausgewählten Knoten");
+        System.out.println("ENTER-Taste: Erstellen einer neuen Relation");
+
         controller.run();
     }
 }

@@ -32,7 +32,6 @@ public class Matrix {
     public void removePointFromMatrix(int index){
         int[][] matrix = new int[this.matrix.length-1][this.matrix.length-1];
 
-        //Ich wett die 10 Stond vo mim läbe zrog!!!
         for (int i = 0, ci = 0; i < matrix.length; i++) {
             if (i != index){
                 for (int j = 0, cj = 0; j < matrix[i].length; j++) {

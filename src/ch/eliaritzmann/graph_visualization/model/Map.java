@@ -16,7 +16,6 @@ public class Map extends Observable {
 
             for (int i = 0; i < delete.length; i++) {
                 //update matrix
-                System.out.println("Index: " + delete[i].getNumber());
                 matrix.removePointFromMatrix(delete[i].getNumber());
             }
 
