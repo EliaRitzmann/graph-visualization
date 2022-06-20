@@ -28,7 +28,6 @@ public class Canvas extends JComponent implements Observer {
             );
 
             //Draw arrow
-
             double dy1 = relations.get(i).getPointa().getY()  - relations.get(i).getPointb().getY() ;
             double dx1 = relations.get(i).getPointa().getX()  - relations.get(i).getPointb().getX() ;
             double theta = Math.atan2(dy1, dx1);

@@ -20,7 +20,7 @@ public class Map extends Observable {
                 matrix.removePointFromMatrix(delete[i].getNumber());
             }
 
-            points.removeIf(p -> p.isSeleted() == -1);
+            points.removeIf(p -> p.isSeleted() != -1);
 
 
             for (int i = 0; i < points.size(); i++) {
