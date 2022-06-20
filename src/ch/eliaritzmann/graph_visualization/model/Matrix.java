@@ -2,9 +2,18 @@ package ch.eliaritzmann.graph_visualization.model;
 
 import java.util.ArrayList;
 
+/**
+ * This Class contains the Adjacency matrix.
+ *
+ *
+ * @author  Elia Ritzmann
+ * @version 1.0
+ * @since   14.6.2022
+ */
 public class Matrix {
     private int[][] matrix = new int[0][0];
 
+    //adds a new relation to the matrix
     public void addRelation(Point a, Point b){
         Relation relation = new Relation(a, b);
 
@@ -12,6 +21,7 @@ public class Matrix {
         matrix[a.getNumber()][b.getNumber()] = (int) relation.getDistance();
     }
 
+    //adds a point to the matrix
     public void addPointToMatrix(){
         int[][] matrix = new int[this.matrix.length+1][this.matrix.length+1];
 
@@ -29,6 +39,7 @@ public class Matrix {
         this.matrix = matrix;
     }
 
+    //removes a point from the matrix
     public void removePointFromMatrix(int index){
         int[][] matrix = new int[this.matrix.length-1][this.matrix.length-1];
 
@@ -47,6 +58,7 @@ public class Matrix {
         this.matrix = matrix;
     }
 
+    //returns all the relations according to the matrix
     public ArrayList<Relation> getRelations(ArrayList<Point> points){
         ArrayList<Relation> relations = new ArrayList<>();
         for (int i = 0; i < matrix.length; i++) {
@@ -63,6 +75,7 @@ public class Matrix {
         return matrix;
     }
 
+    //Outputs the matrix in the console
     public void debugMatrix(){
 
         for (int i = 0; i<this.matrix.length; i++) {

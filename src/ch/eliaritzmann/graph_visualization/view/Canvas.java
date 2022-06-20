@@ -9,6 +9,14 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * This Class draws the things on the Screen
+ *
+ *
+ * @author  Elia Ritzmann
+ * @version 1.0
+ * @since   14.6.2022
+ */
 public class Canvas extends JComponent implements Observer {
     private ArrayList<Point> points = new ArrayList<>();
     private ArrayList<Relation> relations = new ArrayList<>();

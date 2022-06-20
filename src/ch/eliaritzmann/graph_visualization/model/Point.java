@@ -1,5 +1,14 @@
 package ch.eliaritzmann.graph_visualization.model;
 
+
+/**
+ * This Class contains the logic for the points.
+ *
+ *
+ * @author  Elia Ritzmann
+ * @version 1.0
+ * @since   14.6.2022
+ */
 public class Point {
     private int x;
     private int y;

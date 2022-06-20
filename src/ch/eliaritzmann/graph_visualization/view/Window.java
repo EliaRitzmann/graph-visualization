@@ -7,6 +7,14 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * This Class contains the logic for the window.
+ *
+ *
+ * @author  Elia Ritzmann
+ * @version 1.0
+ * @since   14.6.2022
+ */
 public class Window {
     private Controller controller;
     private JFrame window = new JFrame();

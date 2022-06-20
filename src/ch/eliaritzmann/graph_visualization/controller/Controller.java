@@ -8,6 +8,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+
+/**
+        * This Class handles the User inputs.
+        *
+        *
+        * @author  Elia Ritzmann
+        * @version 1.0
+        * @since   14.6.2022
+        */
 public class Controller implements MouseListener, KeyListener {
     private JFrame window;
     private final Map map;
@@ -16,6 +25,7 @@ public class Controller implements MouseListener, KeyListener {
         this.map = map;
     }
 
+    //function will run at the start of the Program
     public void run() {
         window.addMouseListener(this);
         window.addKeyListener(this);

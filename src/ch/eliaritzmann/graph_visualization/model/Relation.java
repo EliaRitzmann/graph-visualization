@@ -1,5 +1,14 @@
 package ch.eliaritzmann.graph_visualization.model;
 
+
+/**
+ * This Class contains the logic for the relations.
+ *
+ *
+ * @author  Elia Ritzmann
+ * @version 1.0
+ * @since   14.6.2022
+ */
 public class Relation {
     private Point pointa;
     private Point pointb;
@@ -17,6 +26,7 @@ public class Relation {
         this.pointb = pointb;
     }
 
+    //returns the distance in pixel between the two points
     public double getDistance(){
         //Pythagoras
         int a = pointa.getX() - pointb.getX();

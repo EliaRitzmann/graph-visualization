@@ -5,6 +5,14 @@ import ch.eliaritzmann.graph_visualization.model.Map;
 import ch.eliaritzmann.graph_visualization.view.Canvas;
 import ch.eliaritzmann.graph_visualization.view.Window;
 
+/**
+ * This Class contains the main method.
+ *
+ *
+ * @author  Elia Ritzmann
+ * @version 1.0
+ * @since   14.6.2022
+ */
 public class Starter {
     public static void main(String[] args) {
         Map map = new Map();
